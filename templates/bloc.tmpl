@@ -1,0 +1,36 @@
+import 'dart:async';
+import 'dart:developer' as developer;
+
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+import 'package:${appName}${relative}/bloc.dart';
+import 'package:${appName}${relative}/domain/usecases/${privateName}_usecase.dart';
+
+
+class ${upperName}Bloc extends Bloc<${upperName}Event, ${upperName}State> {
+  ${upperName}Bloc({@required ${upperName}UseCase ${privateName}UseCase,})
+      : assert(${privateName}UseCase != null),
+      _${privateName}UseCase = ${privateName}UseCase ;
+
+  final ${upperName}UseCase _${privateName}UseCase;
+
+  @override
+  ${upperName}State get initialState => ${upperName}Initial();
+
+  @override
+  Stream<${upperName}State> mapEventToState(
+    ${upperName}Event event,
+  ) async* {
+    if (event is Load${upperName}) {
+      try {
+        yield ${upperName}Loading();
+        await Future.delayed(Duration(seconds: 1));
+        yield ${upperName}Loaded(initialMessage: "Hello World");
+      } catch (_, stackTrace) {
+        developer.log('$_', name: '${upperName}LoadEvent', error: _, stackTrace: stackTrace);
+        yield ${upperName}Failure(error: _?.toString());
+      }
+    }
+  }
+}

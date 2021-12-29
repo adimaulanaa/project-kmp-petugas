@@ -1,0 +1,1 @@
+adb uninstall nitoza.kmp_petugas_app

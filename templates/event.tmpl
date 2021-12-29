@@ -1,0 +1,14 @@
+import 'package:equatable/equatable.dart';
+import 'package:meta/meta.dart';
+
+abstract class ${upperName}Event extends Equatable {
+  const ${upperName}Event();
+
+  @override
+  List<Object> get props => [];
+}
+
+class Load${upperName} extends ${upperName}Event {
+  @override
+  String toString() => 'Load${upperName}';
+}

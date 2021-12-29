@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "838567063625",
+    "project_id": "kampung-warga-7dft",
+    "storage_bucket": "kampung-warga-7dft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838567063625:android:9c263b7ffaf04699e74f98",
+        "android_client_info": {
+          "package_name": "com.nitoza.app.kmp.warga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzrQ2TIIEf5KxCjwhsEdotHOAAF6NEOU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838567063625:android:438768301fc4b0fde74f98",
+        "android_client_info": {
+          "package_name": "nitoza.kmp_pengurus_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzrQ2TIIEf5KxCjwhsEdotHOAAF6NEOU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838567063625:android:67f71f3d286ee9e8e74f98",
+        "android_client_info": {
+          "package_name": "nitoza.kmp_petugas_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzrQ2TIIEf5KxCjwhsEdotHOAAF6NEOU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "838567063625-u72dajavbf40k1t364hgb7nk44nqhleu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

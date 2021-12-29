@@ -1,0 +1,4 @@
+storePassword=7890123456
+keyPassword=7890123456
+keyAlias=digicanvaskey
+storeFile=/Users/YOUR_USER/keys/digicanvaskey.jks

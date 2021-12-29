@@ -1,0 +1,32 @@
+import 'package:meta/meta.dart';
+
+abstract class ${upperName}State {
+  List<Object> get props => [];
+}
+
+class ${upperName}Initial extends ${upperName}State {}
+
+class ${upperName}Loading extends ${upperName}State {
+
+}
+
+class ${upperName}Loaded extends ${upperName}State {
+  ${upperName}Loaded({@required this.initialMessage});
+
+  final String initialMessage;
+
+  @override
+  List<Object> get props => [initialMessage];
+}
+
+class ${upperName}Failure extends ${upperName}State {
+  ${upperName}Failure({@required this.error});
+
+  final String error;
+
+  @override
+  List<Object> get props => [error];
+
+  @override
+  String toString() => '${upperName}Failure { error: $error }';
+}
