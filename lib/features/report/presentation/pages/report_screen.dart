@@ -216,7 +216,7 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
               Container(
                 height: 27,
-                width: 70,
+                width: 60,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(21),
                     color: Colors.black.withOpacity(0.1)),
@@ -284,7 +284,7 @@ class _ReportScreenState extends State<ReportScreen> {
               ),
               Container(
                 height: 27,
-                width: 106,
+                width: 90,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(21),
                     color: Colors.black.withOpacity(0.1)),
