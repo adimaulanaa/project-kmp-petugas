@@ -18,8 +18,15 @@ abstract class HttpManager {
   Future<dynamic> download({
     required String url,
     String path,
+    Map body,
     required Map<String, String> headers,
   });
+  Future<dynamic> downloadreport({
+    required String url,
+    String path,
+    required Map<String, String> headers,
+  });
+
 
   Future<dynamic> post({
     String url,
@@ -162,6 +169,36 @@ class AppHttpManager implements HttpManager {
   Future download({
     String? url,
     String? path,
+    Map? body,
+    required Map<String, String> headers,
+  }) async {
+    try {
+      final response = await _dio
+          .download(
+        _queryBuilder(url, {}),
+        path,
+        data: body != null
+                      ? json.encode(body)
+                      : null,
+        options: Options(
+          method: 'POST',
+          headers: _headerBuilder(headers),
+        ),
+      )
+          .timeout(_httpUploadTimeout, onTimeout: () {
+        throw NetworkException();
+      });
+
+      return _returnResponse(response);
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+
+  @override
+  Future downloadreport({
+    String? url,
+    String? path,
     required Map<String, String> headers,
   }) async {
     try {
@@ -183,6 +220,7 @@ class AppHttpManager implements HttpManager {
       return handleError(error);
     }
   }
+
 
   @override
   Future<dynamic> post({

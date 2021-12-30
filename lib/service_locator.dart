@@ -243,7 +243,7 @@ Future<void> initDependencyInjection() async {
             cashBookFinancial: serviceLocator(),
             cashBookFinancialFromCache: serviceLocator(),
             pdfReport: serviceLocator(),
-            session: serviceLocator(),
+            session: serviceLocator(), dbServices: serviceLocator(),
           ));
 
   // Use Cases

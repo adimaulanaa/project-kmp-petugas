@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -9,6 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:kmp_petugas_app/config/global_vars.dart';
 import 'package:kmp_petugas_app/config/string_resources.dart';
 import 'package:kmp_petugas_app/features/authentication/data/models/user_model.dart';
+import 'package:kmp_petugas_app/features/dashboard/data/models/dashboard_model.dart';
 import 'package:kmp_petugas_app/features/financial/data/models/cash_book_model.dart';
 import 'package:kmp_petugas_app/features/financial/data/models/month.dart';
 import 'package:kmp_petugas_app/features/financial/data/models/year.dart';
@@ -82,11 +85,15 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
   List<Report> listCashbook = [];
   List<Report> listPemasukan = [];
   List<Report> listPengeluaran = [];
+  List<Villages>? Village = [];
+  List<Assignment> assig = [];
   UserModel? session;
   Officer? off;
+  Officer? ass;
   String nama = '';
   String rt = '';
   String rw = '';
+  List<String>? rtplaces = [];
 
   int? bulanstart;
   int? tahunstart;
@@ -122,6 +129,7 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
     listPengeluaran.clear();
 
     BlocProvider.of<FinancialStatementBloc>(context).add(GetSessionEvent());
+    BlocProvider.of<FinancialStatementBloc>(context).add(LoadRtRw());
     BlocProvider.of<FinancialStatementBloc>(context).add(
         GetCashBookFinancialEvent(
             yearstart: tahunstart,
@@ -129,7 +137,8 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
             monthend: bulanend,
             yearend: tahunend,
             type: tipe,
-            ispaid: isPaid));
+            ispaid: isPaid,
+            rtplace: rtplaces));
   }
 
   @override
@@ -157,11 +166,17 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
             setState(() {});
           }
           progress!.dismiss();
+        } else if (state is RtRwLoaded) {
+          if (state.listVillage != null) {
+            Village = state.listVillage;
+          }
         } else if (state is SessionLoaded) {
           setState(() {
             if (state.data != null) {
               session = state.data;
               off = state.data!.officer;
+              assig = off!.assignments!;
+
               nama = session!.name.toString();
               rt = off!.rt.toString();
               rw = off!.rw.toString();
@@ -261,7 +276,8 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                           yearend: tahunstart,
                                           monthend: bulanstart,
                                           type: tipe,
-                                          ispaid: isPaid));
+                                          ispaid: isPaid,
+                                          rtplace: rtplaces));
                                   // progress.dismiss();
                                 });
                               },
@@ -316,10 +332,10 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
 
                                   final progress = ProgressHUD.of(context);
 
-                                  // progress!.showWithText(GlobalConfiguration()
-                                  //         .getValue(
-                                  //             GlobalVars.TEXT_LOADING_TITLE) ??
-                                  //     StringResources.PLEASE_WAIT);
+                                  progress!.showWithText(GlobalConfiguration()
+                                          .getValue(
+                                              GlobalVars.TEXT_LOADING_TITLE) ??
+                                      StringResources.PLEASE_WAIT);
 
                                   FocusScope.of(context)
                                       .requestFocus(new FocusNode());
@@ -332,7 +348,8 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                           yearend: tahunstart,
                                           monthend: bulanstart,
                                           type: tipe,
-                                          ispaid: isPaid));
+                                          ispaid: isPaid,
+                                          rtplace: rtplaces));
                                   // progress.dismiss();
                                 });
                               },
@@ -488,12 +505,13 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                     EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 10),
                 child: KmpFlatButton(
                     onPressed: () async {
-                      var result = await showModalBottomSheet(
+                      GetPdfReportEvent result = await showModalBottomSheet(
                           useRootNavigator: true,
                           isScrollControlled: true,
                           context: context,
                           // builder:
                           builder: (context) {
+                            rtplaces = [];
                             return StatefulBuilder(builder:
                                 (BuildContext context, StateSetter setState) {
                               return Container(
@@ -1050,19 +1068,21 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                             height: 50,
                                             child: ListView.builder(
                                               // shrinkWrap: true,
-                                              itemCount: daftar.length,
+                                              itemCount: assig.length,
                                               scrollDirection: Axis.horizontal,
                                               itemBuilder: (context, index) {
-                                                final item = daftar[index];
+                                                final item = assig[index];
 
                                                 return InkWell(
                                                   onTap: () {
                                                     setState(() {
-                                                      item['isChecked'] =
-                                                          !item['isChecked'];
-                                                      this.onchange(
-                                                          item['nama'],
-                                                          item['isChecked']);
+                                                      item.isChecked =
+                                                          !item.isChecked;
+                                                      this.onchange(item.id!,
+                                                          item.isChecked);
+
+                                                      // rtplaces = data;
+                                                      // printWarning(rtplaces);
                                                     });
                                                   },
                                                   child: Container(
@@ -1075,7 +1095,7 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(12),
-                                                        color: item['isChecked'] ==
+                                                        color: item.isChecked ==
                                                                 true
                                                             ? Color(0xff58C863)
                                                                 .withOpacity(
@@ -1084,14 +1104,15 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                                                 0xffE5E5E5)),
                                                     child: Center(
                                                       child: Text(
-                                                        item['nama'],
+                                                        item.rtNumber
+                                                            .toString(),
                                                         style: TextStyle(
                                                           fontFamily: "Nunito",
                                                           fontWeight:
                                                               FontWeight.w700,
                                                           fontSize: 13,
                                                           color:
-                                                              item['isChecked'] ==
+                                                              item.isChecked ==
                                                                       true
                                                                   ? Colors.white
                                                                   : Colors
@@ -1129,7 +1150,8 @@ class _FinancialStatementScreenState extends State<FinancialStatementScreen> {
                                             monthend: int.parse(getbulanend!),
                                             yearend: int.parse(gettahunend!),
                                             type: gettipe,
-                                            ispaid: getisPaid);
+                                            ispaid: getisPaid,
+                                            rtplace: listNama);
                                         Navigator.pop(context, data);
                                       },
                                       title: 'Download',

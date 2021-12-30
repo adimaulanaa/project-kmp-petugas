@@ -39,7 +39,7 @@ class _EditProfileState extends State<EditProfile> {
   List<RegionModel> listKel = [];
   List<Officer>? listOfficer = [];
 
-  List<Village> listVillage = [];
+  List<Villages> listVillage = [];
   String noKtp = '';
   String nama = '';
   String gender = '';

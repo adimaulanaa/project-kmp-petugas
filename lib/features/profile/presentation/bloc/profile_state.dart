@@ -33,7 +33,7 @@ class EditProfileLoaded extends ProfileState {
   });
 
   bool isFromCacheFirst;
-  List<Village>? listVillage;
+  List<Villages>? listVillage;
   List<RegionModel>? listRegion;
 
   @override

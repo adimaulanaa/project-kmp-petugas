@@ -102,7 +102,7 @@ class Client {
   String? description;
   String? code;
   String? displayName;
-  List<Village>? villages;
+  List<Villages>? villages;
   String? clientId;
 
   factory Client.fromJson(Map<String?, dynamic> json) => Client(
@@ -113,8 +113,8 @@ class Client {
         displayName: json["display_name"] == null ? null : json["display_name"],
         villages: json["villages"] == null
             ? null
-            : List<Village>.from(
-                json["villages"].map((x) => Village.fromJson(x))),
+            : List<Villages>.from(
+                json["villages"].map((x) => Villages.fromJson(x))),
         clientId: json["id"] == null ? null : json["id"],
       );
 
@@ -131,8 +131,8 @@ class Client {
       };
 }
 
-class Village {
-  Village({
+class Villages {
+  Villages({
     this.id,
     this.subDistrict,
     this.province,
@@ -172,7 +172,7 @@ class Village {
   List<Place>? rwPlaces;
   String? villageId;
 
-  factory Village.fromJson(Map<String?, dynamic> json) => Village(
+  factory Villages.fromJson(Map<String?, dynamic> json) => Villages(
         id: json["_id"] == null ? null : json["_id"],
         subDistrict: json["sub_district"] == null ? null : json["sub_district"],
         province: json["province"] == null ? null : json["province"],

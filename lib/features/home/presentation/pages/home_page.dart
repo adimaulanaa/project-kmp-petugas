@@ -36,8 +36,8 @@ class _HomePageState extends State<HomePage>
 
   final List<Widget> _children = [
     DashboardPage(),
-    ReportPage(),
     FinancialStatementPage(),
+    ReportPage(),
     ProfilePage(),
   ];
 

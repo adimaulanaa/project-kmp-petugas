@@ -241,18 +241,18 @@ class Officer {
 }
 
 class Assignment {
-  Assignment({
-    this.rwNumber,
-    this.rtNumber,
-    this.id,
-    this.officer,
-    this.rtPlace,
-    this.rw,
-    this.rt,
-    this.villageCode,
-    this.villageName,
-    this.clientDisplayName,
-  });
+  Assignment(
+      {this.rwNumber,
+      this.rtNumber,
+      this.id,
+      this.officer,
+      this.rtPlace,
+      this.rw,
+      this.rt,
+      this.villageCode,
+      this.villageName,
+      this.clientDisplayName,
+      this.isChecked = false});
 
   int? rwNumber;
   int? rtNumber;
@@ -264,6 +264,7 @@ class Assignment {
   String? villageCode;
   String? villageName;
   String? clientDisplayName;
+  bool isChecked;
 
   factory Assignment.fromJson(Map<String, dynamic> json) => Assignment(
         rwNumber: json["rw_number"] == null ? null : json["rw_number"],
@@ -278,6 +279,7 @@ class Assignment {
         clientDisplayName: json["client_display_name"] == null
             ? null
             : json["client_display_name"],
+        isChecked: json["is_checked"] == null ? false : json["is_checked"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -292,6 +294,7 @@ class Assignment {
         "village_name": villageName == null ? null : villageName,
         "client_display_name":
             clientDisplayName == null ? null : clientDisplayName,
+        "is_checked": isChecked == null ? false : isChecked,
       };
 }
 

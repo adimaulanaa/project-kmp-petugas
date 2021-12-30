@@ -1,4 +1,5 @@
 import 'package:kmp_petugas_app/features/authentication/data/models/user_model.dart';
+import 'package:kmp_petugas_app/features/dashboard/data/models/dashboard_model.dart';
 import 'package:kmp_petugas_app/features/financial/data/models/cash_book_model.dart';
 
 abstract class FinancialStatementState {
@@ -18,6 +19,15 @@ class CashBookFinancialLoaded extends FinancialStatementState {
 
   @override
   List<Object> get props => [data!];
+}
+class RtRwLoaded extends FinancialStatementState {
+  RtRwLoaded({this.listRwRt, this.listVillage});
+
+  List<VillageRwRt>? listRwRt;
+  List<Villages>? listVillage;
+
+  @override
+  List<Object> get props => [listVillage!, listRwRt!];
 }
 
 class SessionLoaded extends FinancialStatementState {

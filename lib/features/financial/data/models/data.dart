@@ -8,7 +8,9 @@ class CashBookData extends Equatable {
       this.yearend,
       this.monthend,
       this.type,
-      this.ispaid});
+      this.ispaid,
+      this.rtplace
+      });
 
   final bool? ispaid;
   final int monthstart;
@@ -16,6 +18,7 @@ class CashBookData extends Equatable {
   final int? yearend;
   final int? monthend;
   final String? type;
+  final List<String>? rtplace;
 
   List<Object> get props => [monthstart, yearstart, monthend!, yearend!, type!, ispaid!];
 }

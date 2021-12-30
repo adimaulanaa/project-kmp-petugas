@@ -11,6 +11,8 @@ class LoadCashBook extends FinancialStatementEvent {}
 
 class GetSessionEvent extends FinancialStatementEvent {}
 
+class LoadRtRw extends FinancialStatementEvent {}
+
 class GetCashBookFinancialEvent extends FinancialStatementEvent {
   final bool? ispaid;
   final int? yearstart;
@@ -18,6 +20,7 @@ class GetCashBookFinancialEvent extends FinancialStatementEvent {
   final int? yearend;
   final int? monthend;
   final String? type;
+  final List<String>? rtplace;
 
   const GetCashBookFinancialEvent(
       {required this.yearstart,
@@ -25,7 +28,8 @@ class GetCashBookFinancialEvent extends FinancialStatementEvent {
       required this.yearend,
       required this.monthend,
       required this.type,
-      required this.ispaid});
+      required this.ispaid,
+      required this.rtplace});
 }
 
 class GetPdfReportEvent extends FinancialStatementEvent {
@@ -35,6 +39,7 @@ class GetPdfReportEvent extends FinancialStatementEvent {
   final int? yearend;
   final int? monthend;
   final String? type;
+  final List<String>? rtplace;
 
   const GetPdfReportEvent(
       {required this.yearstart,
@@ -42,5 +47,6 @@ class GetPdfReportEvent extends FinancialStatementEvent {
       required this.yearend,
       required this.monthend,
       required this.type,
-      required this.ispaid});
+      required this.ispaid,
+      required this.rtplace});
 }

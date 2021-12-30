@@ -71,7 +71,7 @@ class ReportRemoteDataSourceImpl implements ReportRemoteDataSource {
         ".pdf";
 
     final response =
-        await httpManager.download(url: url, path: savePath, headers: {
+        await httpManager.downloadreport(url: url, path: savePath, headers: {
       HttpHeaders.authorizationHeader: 'bearer $token',
     });
 
