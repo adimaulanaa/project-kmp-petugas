@@ -206,7 +206,7 @@ class _ReportScreenState extends State<ReportScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Laporan Keuangan",
+                "Laporan Transaksi",
                 style: TextStyle(
                     fontFamily: "Nunito",
                     fontStyle: FontStyle.normal,
